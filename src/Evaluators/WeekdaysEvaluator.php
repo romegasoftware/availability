@@ -12,18 +12,12 @@ final class WeekdaysEvaluator implements RuleEvaluator
 {
     public function matches(array $config, CarbonInterface $at, AvailabilitySubject $subject): bool
     {
-        $days = collect($config['days'] ?? [])
+        return collect($config['days'] ?? [])
             ->filter(fn ($day): bool => is_numeric($day))
             ->map(fn ($day): int => (int) $day)
             ->filter(fn (int $day): bool => $day >= 1 && $day <= 7)
             ->unique()
             ->values()
-            ->all();
-
-        if ($days === []) {
-            return false;
-        }
-
-        return in_array($at->isoWeekday(), $days, true);
+            ->containsStrict($at->isoWeekday());
     }
 }

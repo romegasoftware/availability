@@ -12,15 +12,9 @@ final class MonthsOfYearEvaluator implements RuleEvaluator
 {
     public function matches(array $config, CarbonInterface $at, AvailabilitySubject $subject): bool
     {
-        $months = collect($config['months'] ?? [])
+        return collect($config['months'] ?? [])
             ->filter(fn ($month): bool => is_numeric($month))
             ->map(fn ($month): int => (int) $month)
-            ->all();
-
-        if ($months === []) {
-            return false;
-        }
-
-        return in_array((int) $at->month, $months, true);
+            ->containsStrict($at->month);
     }
 }

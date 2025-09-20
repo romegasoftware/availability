@@ -14,7 +14,7 @@ final class BlackoutDateEvaluator implements RuleEvaluator
 {
     public function matches(array $config, CarbonInterface $at, AvailabilitySubject $subject): bool
     {
-        $dates = collect($config['dates'] ?? [])
+        return collect($config['dates'] ?? [])
             ->filter(fn ($date): bool => is_string($date) && $date !== '')
             ->map(function (string $date) use ($at): ?string {
                 try {
@@ -32,12 +32,6 @@ final class BlackoutDateEvaluator implements RuleEvaluator
             ->filter()
             ->unique()
             ->values()
-            ->all();
-
-        if ($dates === []) {
-            return false;
-        }
-
-        return in_array($at->toImmutable()->toDateString(), $dates, true);
+            ->containsStrict($at->toImmutable()->toDateString());
     }
 }
