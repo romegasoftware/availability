@@ -361,7 +361,7 @@ final class HasAvailabilityTest extends TestCase
 
         // When retrieved from database, it should be cast to Effect enum
         $freshSubject = TestAvailabilitySubject::find($subject->id);
-        
+
         // The getAttribute call in getAvailabilityDefaultEffect should get the Effect instance
         $result = $freshSubject->getAvailabilityDefaultEffect();
         $this->assertEquals(Effect::Allow, $result);
@@ -379,7 +379,7 @@ final class HasAvailabilityTest extends TestCase
         $subject = new TestAvailabilitySubjectWithoutCasts([
             'availability_default' => '   ',
         ]);
-        
+
         // Since '   ' is not empty string but also not a valid Effect value,
         // Effect::from() would throw an exception, so this tests error handling
         $this->expectException(\ValueError::class);
@@ -404,7 +404,7 @@ final class HasAvailabilityTest extends TestCase
         try {
             // Test custom rule model configuration
             config(['availability.models.rule' => AvailabilityRule::class]);
-            
+
             $subject = TestAvailabilitySubject::create([
                 'availability_default' => Effect::Allow,
                 'availability_timezone' => 'UTC',
@@ -415,11 +415,11 @@ final class HasAvailabilityTest extends TestCase
 
             // Test custom default effect configuration
             config(['availability.default_effect' => 'deny']);
-            
+
             $subjectWithNullDefault = new TestAvailabilitySubject([
                 'availability_default' => null,
             ]);
-            
+
             $result = $subjectWithNullDefault->getAvailabilityDefaultEffect();
             $this->assertEquals(Effect::Deny, $result);
 
