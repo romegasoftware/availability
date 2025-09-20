@@ -1,0 +1,43 @@
+{
+    "name": "romegasoftware/availability",
+    "description": "Reusable availability rule engine for Eloquent models.",
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "php": "^8.4",
+        "illuminate/contracts": "^12.0",
+        "illuminate/database": "^12.0",
+        "illuminate/support": "^12.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10.0",
+        "phpunit/phpunit": "^12.0",
+        "larastan/larastan": "^3.6",
+        "laravel/pint": "^1.18"
+    },
+    "autoload": {
+        "psr-4": {
+            "RomegaSoftware\\Availability\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "RomegaSoftware\\Availability\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage",
+        "format": "vendor/bin/pint --parallel --preset laravel",
+        "analyse": "vendor/bin/phpstan analyse --memory-limit=2G"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "RomegaSoftware\\Availability\\Providers\\AvailabilityServiceProvider"
+            ]
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
