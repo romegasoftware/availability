@@ -1,6 +1,8 @@
-# Romega Availability
+# Romega Software - Availability
 
 Reusable availability rule engine for Laravel models. Attach rules to any Eloquent model and evaluate allow/deny windows with a predictable "last matching rule wins" policy.
+
+This package is brought to you by [Romega Software](https://romegasoftware.com). Romega Software is software development agency specializing in helping customers integrate AI and custom software into their business, helping companies in growth mode better acquire, visualize, and utilize their data, and helping entrepreneurs bring their ideas to life.
 
 ## Installation
 
