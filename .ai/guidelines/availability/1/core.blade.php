@@ -16,6 +16,13 @@ $availabilityPackage = $roster->packages()->firstWhere(fn ($package) => $package
 ## Model Setup
 - Add the `HasAvailability` trait to every subject that needs scheduling or implement `AvailabilitySubject` when you require a custom relationship.
 - Cast `availability_default` to the `Effect` enum so reads and writes stay type-safe.
+
+@boostsnippet("Migration to add Fields To Model", "php")
+$table->enum('availability_default', ['allow', 'deny'])
+    ->default('deny');
+$table->string('availability_timezone')->nullable()->after('availability_default');
+@endboostsnippet
+
 - Override `getAvailabilityTimezone()` when the timezone depends on related models (location, owner, tenant).
 - Expose helper methods (e.g. `setBusinessHours`) that group rule creation instead of duplicating rule arrays across services.
 
