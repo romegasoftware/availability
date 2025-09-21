@@ -37,6 +37,10 @@ final class AvailabilityServiceProvider extends ServiceProvider
             $this->publishes([
                 __DIR__.'/../../database/migrations/' => database_path('migrations'),
             ], 'availability-migrations');
+
+            $this->publishes([
+                __DIR__.'/../../.ai' => base_path('.ai'),
+            ], 'availability-ai');
         }
 
         $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
